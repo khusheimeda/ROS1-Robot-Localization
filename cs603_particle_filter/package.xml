@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>cs603_particle_filter</name>
+  <version>1.0.0</version>
+  <description>
+    COMPSCI-603 Project 3: Robot Localization Using Particle Filters.
+
+    This package implements a particle filter for robot localization in a 
+    simulated house environment using a Triton robot equipped with a 2D LiDAR.
+
+    This package is based on the starter code from:
+    https://gitlab.com/HCRLab/stingray-robotics/cs603_particle_filter
+
+    === Deliverable 1: Motion and Sensor Models ===
+
+    The package includes:
+      - An odometry-based motion model (scripts/motion_model.py)
+      - A likelihood field sensor model (scripts/sensor_model.py)
+      - A precomputed likelihood field / distance matrix (maps/likelihood_field.npy)
+      - A metric map of the house environment (maps/metric_map.png)
+
+    === How to Run ===
+
+    Step 1: Build the package
+      cd ~/catkin_ws
+      catkin_make
+      source devel/setup.bash
+
+    Step 2: Launch the simulation (Gazebo + RViz + particle filter node)
+      roslaunch cs603_particle_filter particle_filter.launch
+
+    Step 3: Drive the robot using teleop (in a separate terminal)
+      rosrun cs603_particle_filter teleop_particle_filter.py
+
+    The launch file will automatically:
+      - Spawn the Triton robot in the house environment in Gazebo
+      - Serve the saved map via map_server
+      - Launch RViz for visualization
+      - Run the particle_filter.py node which executes the motion model 
+        and sensor model
+
+    In RViz, add the following displays to visualize:
+      - Map (topic: /map) to see the occupancy grid
+      - LaserScan (topic: /scan) to see the LiDAR readings
+      - Odometry (topic: /odom) to see the robot pose
+
+    === File Descriptions ===
+
+    scripts/particle_filter.py          - Main ROS node (launched automatically)
+    scripts/motion_model.py             - Odometry-based motion model module
+    scripts/sensor_model.py             - Likelihood field sensor model module
+    scripts/generate_likelihood_field.py - Offline script to compute the likelihood field
+    scripts/teleop_particle_filter.py   - Keyboard teleop for robot control (provided)
+    scripts/position_publisher.py       - TF helper node (provided by starter package)
+    maps/map.yaml                       - Map metadata
+    maps/map.pgm                        - Occupancy grid map image
+    maps/likelihood_field.npy           - Precomputed distance matrix (used at runtime)
+    maps/likelihood_field.png           - Likelihood field visualization (for submission)
+    maps/metric_map.png                 - Metric map visualization (for submission)
+
+    === Starter Package ===
+
+    This project uses the starter package provided by HCRLab at:
+    https://gitlab.com/HCRLab/stingray-robotics/cs603_particle_filter
+    The motion model, sensor model, likelihood field generation, and particle 
+    filter code were implemented from scratch by the student.
+  </description>
+
+  <maintainer email="kmeda@umass.edu">Khushei Meda</maintainer>
+
+  <license>MIT</license>
+
+  <url type="repository">https://gitlab.com/HCRLab/stingray-robotics/cs603_particle_filter</url>
+
+  <author email="kmeda@umass.edu">Khushei Meda</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Build dependencies -->
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>map_server</build_depend>
+  <build_depend>gazebo_ros</build_depend>
+
+  <!-- Runtime dependencies -->
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>tf</exec_depend>
+  <exec_depend>map_server</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+
+  <export>
+    <gazebo_ros gazebo_media_path="${prefix}"/>
+    <gazebo_ros gazebo_model_path="${prefix}/models"/>
+  </export>
+</package>
