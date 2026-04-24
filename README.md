@@ -16,7 +16,8 @@ This package is based on the CS603 Particle Filter starter code, with custom imp
 - OS: Ubuntu 20.04 LTS  
 - ROS: Noetic  
 - Simulator: Gazebo  
-- Python: Python 3  
+- Python: Python 3
+- turtlebot3 (https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/) parallel to `cs603_particle_filter`
 
 ### Required Python Packages
 
